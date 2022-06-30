@@ -5,6 +5,7 @@ import WeatherCard from "./WeatherCard";
 const Main = () => {
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([]);
+  const [error, setError] = useState("");
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
@@ -21,15 +22,29 @@ const Main = () => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${apiKey}&units=${units}&lang=${lang}`;
     try {
       const response = await axios.get(url);
-      // console.log(response);
+      //   console.log(response);
       const { main, name, sys, weather, id } = response.data;
       const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
-      setData([{ main, name, sys, weather, iconUrl, id }]);
+      const isExist = data.some((card) => card.id === id);
+      if (isExist) {
+        setError(
+          `You already know the weather for ${name}, Please search for another city 🤡`
+        );
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      } else {
+        setData([{ main, name, sys, weather, iconUrl, id }, ...data]);
+      }
     } catch (err) {
       console.log(err);
+      setError(err.message);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
   };
-  console.log(data);
+  // console.log(data);
   return (
     <section className="main">
       <form onSubmit={handleSubmit}>
@@ -37,15 +52,17 @@ const Main = () => {
           onChange={handleChange}
           type="text"
           placeholder="Search for a city"
-          autoFocus
           value={searchText}
+          autoFocus
         />
         <button type="submit">SUBMIT</button>
-        <span className="msg"></span>
+        <span className="msg">{error}</span>
       </form>
       <div className="container">
         <ul className="cities">
-          <WeatherCard {...data} />
+          {data?.map((item) => (
+            <WeatherCard key={item.id} data={item} />
+          ))}
         </ul>
       </div>
     </section>
