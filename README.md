@@ -64,7 +64,3 @@ $ npm start / yarn start
 ### Preview of the Project
 
 # ![weather](https://user-images.githubusercontent.com/98649983/181056625-bb609786-62bb-4193-aab4-7cd938a3afdb.gif)
-
-# Weather-App React
-
-https://weather-apps-react.netlify.app/
