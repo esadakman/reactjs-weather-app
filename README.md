@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Weather App
 
 ## Objective
@@ -64,9 +63,8 @@ $ npm start / yarn start
 
 ### Preview of the Project
 
-![weather](https://user-images.githubusercontent.com/98649983/181056625-bb609786-62bb-4193-aab4-7cd938a3afdb.gif)
-=======
+# ![weather](https://user-images.githubusercontent.com/98649983/181056625-bb609786-62bb-4193-aab4-7cd938a3afdb.gif)
+
 # Weather-App React
 
 https://weather-apps-react.netlify.app/
->>>>>>> f5d689d99b660a8a768ff53522725c060c14851c
